@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 
-class AddPlace extends StatefulWidget {
-  const AddPlace({super.key});
+class AddPlaceScreen extends StatefulWidget {
+  const AddPlaceScreen({super.key});
 
   @override
-  State<StatefulWidget> createState() => _AddPlace();
+  State<StatefulWidget> createState() => _AddPlaceScreen();
 }
 
-class _AddPlace extends State<AddPlace> {
+class _AddPlaceScreen extends State<AddPlaceScreen> {
+  final _titleController = TextEditingController();
+
+  @override
+  void dispose() {
+    _titleController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,27 +23,20 @@ class _AddPlace extends State<AddPlace> {
         title: const Text("Add new Place"),
         backgroundColor: Colors.black,
       ),
-      body: Form(
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(12),
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(12),
-              child: TextFormField(
-                maxLength: 50,
-                decoration: const InputDecoration(
-                  label: Text("Title"),
-                ),
-              ),
+            TextField(
+              decoration: const InputDecoration(labelText: "Title"),
+              controller: _titleController,
+              style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
             ),
-            ElevatedButton(
-              onPressed: () {}, // TODO: add save method
-              child: const Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(Icons.add),
-                  Text("Add Place"),
-                ],
-              ),
+            const SizedBox(height: 16),
+            ElevatedButton.icon(
+              onPressed: () {},
+              icon: const Icon(Icons.add),
+              label: const Text("Add Place"),
             ),
           ],
         ),

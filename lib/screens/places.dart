@@ -1,38 +1,37 @@
-import 'package:favorite_places/screens/add_place.dart';
 import 'package:flutter/material.dart';
 
-class PlacesList extends StatefulWidget {
-  const PlacesList({super.key});
+import 'package:favorite_places/screens/add_place.dart';
+import 'package:favorite_places/widgets/places_list.dart';
+
+class PlacesScreen extends StatefulWidget {
+  const PlacesScreen({super.key});
 
   @override
-  State<PlacesList> createState() => _PlacesList();
+  State<PlacesScreen> createState() => _PlacesScreen();
 }
 
-class _PlacesList extends State<PlacesList> {
-
-  void _addPlace() {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const AddPlace(),));
-  }
-
+class _PlacesScreen extends State<PlacesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Your Places"),
-        actions: [
-          IconButton(onPressed: _addPlace, icon: const Icon(Icons.add))
-        ],
         backgroundColor: Colors.black,
-      ),
-      body: ListView(
-        padding: const EdgeInsets.all(12),
-        children: [   
-          Row(
-            children: [
-              Text("Hello World", style: Theme.of(context).textTheme.titleMedium),
-            ],
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const AddPlaceScreen(),
+                ),
+              );
+            },
+            icon: const Icon(Icons.add),
           ),
         ],
+      ),
+      body: PlacesList(
+        places: [],
       ),
     );
   }
